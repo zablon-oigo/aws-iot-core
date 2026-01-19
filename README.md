@@ -5,6 +5,7 @@ This project demonstrates how to ingest streaming IoT data into Amazon DynamoDB 
 A Python script simulates an IoT device by publishing MQTT messages to AWS IoT Core. An IoT Core Rule forwards these messages to a Lambda function for lightweight transformation before persisting them into DynamoDB.
 
 #### Architecture Diagram
+<img width="881" height="408" alt="iot-core" src="https://github.com/user-attachments/assets/93ca5a04-4487-4f0e-8c1d-3fbc216ce9e0" />
 
 
 ### Setup Guide 
