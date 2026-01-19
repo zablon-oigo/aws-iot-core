@@ -111,3 +111,9 @@ Attach this policy to the Lambda execution role:
 }
 
 ```
+
+AWS IoT Rule
+Create an IoT Rule:
+```sql
+SELECT * FROM 'iot/simulator/distance'
+```
