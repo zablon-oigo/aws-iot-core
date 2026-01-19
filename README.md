@@ -101,3 +101,13 @@ def lambda_handler(event, context):
         "body": "Item inserted"
     }
 ```
+IAM Permissions for Lambda
+Attach this policy to the Lambda execution role:
+```bash
+{
+  "Effect": "Allow",
+  "Action": "dynamodb:PutItem",
+  "Resource": "arn:aws:dynamodb:REGION:ACCOUNT_ID:table/data_v1"
+}
+
+```
