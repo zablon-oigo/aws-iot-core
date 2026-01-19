@@ -117,3 +117,16 @@ Create an IoT Rule:
 ```sql
 SELECT * FROM 'iot/simulator/distance'
 ```
+Running the Simulator
+Start publishing IoT data:
+```bash
+python main.py
+```
+Example payload sent:
+```bash
+{
+  "timestamp": "2026-01-18T09:35:00+00:00",
+  "distance_cm": 45,
+  "status": "GREEN"
+}
+```
