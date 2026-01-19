@@ -1,0 +1,66 @@
+### Ingesting Streaming Data from AWS IoT Core into DynamoDB
+
+This project demonstrates how to ingest streaming IoT data into Amazon DynamoDB using AWS IoT Core, Lambda, and a Python-based IoT device simulator.
+
+A Python script simulates an IoT device by publishing MQTT messages to AWS IoT Core. An IoT Core Rule forwards these messages to a Lambda function for lightweight transformation before persisting them into DynamoDB.
+
+#### Architecture Diagram
+
+
+### Setup Guide 
+Create an IoT Policy
+```bash
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Connect",
+        "iot:Publish",
+        "iot:Subscribe",
+        "iot:Receive"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+```
+Create it via CLI:
+```bash
+aws iot create-policy \
+  --policy-name distancePolicy \
+  --policy-document file://distancePolicy.json
+```
+Download the Amazon Root CA
+```bash
+curl https://www.amazontrust.com/repository/AmazonRootCA1.pem  > root-CA.crt
+```
+
+Create an IoT Thing
+```bash
+aws iot create-thing --thing-name distance
+
+```
+Create Device Certificates
+```bash
+aws iot create-keys-and-certificate \
+  --set-as-active \
+  --certificate-pem-outfile certificate.pem.crt \
+  --private-key-outfile private.pem.key
+
+```
+Save the certificate ARN from the output.
+
+Attach Policy to Certificate
+```bash
+aws iot attach-policy \
+  --policy-name distancePolicy \
+  --target YOUR_CERT_ARN
+
+```
+Get Your AWS IoT Endpoint
+```bash
+aws iot describe-endpoint --endpoint-type iot:Data-ATS
+```
