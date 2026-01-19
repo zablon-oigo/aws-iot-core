@@ -6,7 +6,7 @@ import _thread
 import paho.mqtt.client as mqtt
 
 AWS_ENDPOINT = " "
-TOPIC = "data"
+TOPIC = "iot/simulator/distance"
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to AWS IoT Core, rc =", rc)
