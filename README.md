@@ -78,3 +78,26 @@ aws dynamodb create-table \
   --billing-mode PAY_PER_REQUEST
 
 ```
+
+Lambda Function
+The Lambda function receives IoT messages and writes them to DynamoDB.
+
+```bash
+import boto3
+
+dynamodb = boto3.client('dynamodb')
+
+def lambda_handler(event, context):
+    dynamodb.put_item(
+        TableName='data_v1',
+        Item={
+            'timestamp': {'S': event['timestamp']},
+            'distance_cm': {'N': str(event['distance_cm'])},
+            'status': {'S': event['status']}
+        }
+    )
+    return {
+        "statusCode": 200,
+        "body": "Item inserted"
+    }
+```
