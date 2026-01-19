@@ -64,3 +64,17 @@ Get Your AWS IoT Endpoint
 ```bash
 aws iot describe-endpoint --endpoint-type iot:Data-ATS
 ```
+
+DynamoDB Setup
+Create a DynamoDB table:
+- Table name: data_v1
+- Partition key: timestamp (String)
+
+```bash
+aws dynamodb create-table \
+  --table-name data_v1 \
+  --attribute-definitions AttributeName=timestamp,AttributeType=S \
+  --key-schema AttributeName=timestamp,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST
+
+```
