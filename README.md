@@ -66,7 +66,8 @@ Get Your AWS IoT Endpoint
 aws iot describe-endpoint --endpoint-type iot:Data-ATS
 ```
 
-DynamoDB Setup
+#### DynamoDB Setup
+
 Create a DynamoDB table:
 - Table name: data_v1
 - Partition key: timestamp (String)
@@ -80,7 +81,8 @@ aws dynamodb create-table \
 
 ```
 
-Lambda Function
+#### Lambda Function
+
 The Lambda function receives IoT messages and writes them to DynamoDB.
 
 ```bash
@@ -102,7 +104,7 @@ def lambda_handler(event, context):
         "body": "Item inserted"
     }
 ```
-IAM Permissions for Lambda
+#### IAM Permissions for Lambda
 Attach this policy to the Lambda execution role:
 ```bash
 {
@@ -113,7 +115,7 @@ Attach this policy to the Lambda execution role:
 
 ```
 
-AWS IoT Rule
+#### AWS IoT Rule
 Create an IoT Rule:
 ```sql
 SELECT * FROM 'iot/simulator/distance'
